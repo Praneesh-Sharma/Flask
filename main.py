@@ -1,5 +1,12 @@
 #Integerate HTML with Flask
 
+#Jinja2 Template engine
+'''
+{%...%} statements/conditions
+{{   }} to print output
+{#...#} internal comments
+'''
+
 from flask import Flask, redirect, url_for, render_template, request
 app=Flask(__name__)
 
@@ -10,11 +17,12 @@ def welcome():
 @app.route('/success/<int:score>')
 def success(score):
     res=""
-    if score>33:
+    if score>=50:
         res="PASS"
     else:
         res="FAIL"
-    return render_template('results.html', result=res)
+    exp = {'score':score, 'res':res}
+    return render_template('results.html', result=exp)
 
 @app.route('/fail/<int:score>')
 def fail(score):
